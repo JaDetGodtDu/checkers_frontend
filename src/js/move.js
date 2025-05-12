@@ -23,7 +23,7 @@ export function handleDrop(event) {
     if (sourceCellId && targetCellId && sourceCellId !== targetCellId) {
       // Print the move in the format "a3-b4"
       const move = `${sourceCellId}-${targetCellId}`;
-      console.log(`Move: ${move}`);
+      console.log(`${move}`); // THE MOVE STRING. IE: "a3-b4" - WE WILL SEND THIS TO BACKEND
 
       // Move the piece in the DOM
       const piece = document.querySelector(`#${sourceCellId} .piece`);
