@@ -49,7 +49,7 @@ body {
 }
 .piece.king {
   background-color: gold; /* Example: Gold background for kings */
-  border: 2px solid black;
+  border: 2px solid gold;
   border-radius: 50%;
   position: relative;
 }
@@ -57,7 +57,7 @@ body {
 .piece.king::after {
   content: "♔"; /* Example: Unicode crown symbol */
   color: rgb(255, 221, 0);
-  font-size: 18px;
+  font-size: 35px;
   position: absolute;
   top: 50%;
   left: 50%;
