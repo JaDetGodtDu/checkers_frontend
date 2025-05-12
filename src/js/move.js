@@ -1,4 +1,5 @@
 let sourceCellId = null;
+let pendingMove = null;
 
 export function handleDragStart(event) {
   sourceCellId = event.target.parentElement.id; // Get the ID of the source cell
@@ -22,14 +23,19 @@ export function handleDrop(event) {
     const targetCellId = target.id; // Get the ID of the target cell
     if (sourceCellId && targetCellId && sourceCellId !== targetCellId) {
       // Print the move in the format "a3-b4"
-      const move = `${sourceCellId}-${targetCellId}`;
-      console.log(`${move}`); // THE MOVE STRING. IE: "a3-b4" - WE WILL SEND THIS TO BACKEND
+      pendingMove = `${sourceCellId}-${targetCellId}`;
+      console.log(`Pending Move: ${pendingMove}`); // THE MOVE STRING. IE: "a3-b4" - WE WILL SEND THIS TO BACKEND
 
       // Move the piece in the DOM
       const piece = document.querySelector(`#${sourceCellId} .piece`);
       if (piece) {
         target.appendChild(piece);
       }
+
+      // sendMoveToBackend(move);
+
+      const button = document.getElementById("make-move-button");
+      button.disabled = !pendingMove;
 
       // Clear the source cell ID
       sourceCellId = null;
@@ -40,4 +46,8 @@ export function handleDragLeave(event) {
   if (target) {
     target.classList.remove("dragover"); // Remove the dragover class
   }
+}
+
+export function getPendingMove() {
+  return pendingMove;
 }
