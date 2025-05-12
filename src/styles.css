@@ -34,11 +34,11 @@ body {
 }
 
 .cell.black {
-  background-color: rgb(183, 127, 37);
+  background-color: rgb(230, 160, 49);
 }
 
 .cell.white {
-  background-color: rgb(230, 160, 49);
+  background-color: rgb(183, 127, 37);
 }
 
 .piece {
@@ -47,11 +47,27 @@ body {
   border-radius: 50%;
   cursor: grab;
 }
+.piece.king {
+  background-color: gold; /* Example: Gold background for kings */
+  border: 2px solid black;
+  border-radius: 50%;
+  position: relative;
+}
+
+.piece.king::after {
+  content: "♔"; /* Example: Unicode crown symbol */
+  color: rgb(255, 221, 0);
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .piece.player1 {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(0,0,0);
 }
 
 .piece.player2 {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(255, 255,255);
 }

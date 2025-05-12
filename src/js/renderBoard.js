@@ -4,6 +4,8 @@ function renderBoard(board) {
   const boardElement = document.getElementById("board");
   boardElement.innerHTML = ""; // Clear previous board
 
+  const flippedBoard = [...board].reverse(); // Reverse the board for display
+
   // Create a container for the board with labels
   const boardContainer = document.createElement("div");
   boardContainer.style.display = "grid";
@@ -26,10 +28,10 @@ function renderBoard(board) {
   }
 
   // Add row labels and the board cells
-  for (let row = board.length - 1; row >= 0; row--) {
-    // Add row label (numbers 1-8)
+  for (let row = 0; row < flippedBoard.length; row++) {
+    // Add row label (numbers 8-1)
     const rowLabel = document.createElement("div");
-    rowLabel.textContent = board.length - row; // Convert 7-0 to 1-8
+    rowLabel.textContent = flippedBoard.length - row; // Reverse the row numbering
     rowLabel.style.display = "flex";
     rowLabel.style.justifyContent = "center";
     rowLabel.style.alignItems = "center";
@@ -37,17 +39,36 @@ function renderBoard(board) {
     boardContainer.appendChild(rowLabel);
 
     // Add board cells
-    for (let col = 0; col < board[row].length; col++) {
+    for (let col = 0; col < flippedBoard[row].length; col++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.classList.add((row + col) % 2 === 0 ? "black" : "white");
 
-      const cellId = `${String.fromCharCode(97 + col)}${board.length - row}`;
+      // Adjust the cell ID to reflect the new numbering
+      const cellId = `${String.fromCharCode(97 + col)}${flippedBoard.length - row}`;
       cell.id = cellId;
 
-      if (board[row][col] === 1 || board[row][col] === 3) {
+      if (
+        flippedBoard[row][col] === 1 ||
+        flippedBoard[row][col] === 3 ||
+        flippedBoard[row][col] === 2 ||
+        flippedBoard[row][col] === 4
+      ) {
         const piece = document.createElement("div");
-        piece.classList.add("piece", board[row][col] === 1 ? "player1" : "player2");
+        piece.classList.add("piece");
+
+        // Add player-specific classes
+        if (flippedBoard[row][col] === 1 || flippedBoard[row][col] === 2) {
+          piece.classList.add("player1"); // Black pieces
+        } else if (flippedBoard[row][col] === 3 || flippedBoard[row][col] === 4) {
+          piece.classList.add("player2"); // White pieces
+        }
+
+        // Add king-specific class
+        if (flippedBoard[row][col] === 2 || flippedBoard[row][col] === 4) {
+          piece.classList.add("king"); // Add king styling
+        }
+
         piece.draggable = true; // Make the piece draggable
         piece.addEventListener("dragstart", handleDragStart);
         cell.appendChild(piece);

@@ -1,20 +1,22 @@
 import  renderBoard  from './js/renderBoard.js';
-import { sendMoveToBackend } from './js/api.js';
+import { sendMoveToBackend, fetchUpdatedBoardState } from './js/api.js';
 import { getPendingMove } from './js/move.js';
 
 
-const boardState = [
-  [1, 0, 1, 0, 1, 0, 1, 0],
-  [0, 1, 0, 1, 0, 1, 0, 1],
-  [1, 0, 1, 0, 1, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 3, 0, 3, 0, 3, 0, 3],
-  [3, 0, 3, 0, 3, 0, 3, 0],
-  [0, 3, 0, 3, 0, 3, 0, 3],
-];
+// const boardState = [
+//   [1, 0, 1, 0, 1, 0, 1, 0],
+//   [0, 1, 0, 1, 0, 1, 0, 1],
+//   [1, 0, 1, 0, 1, 0, 1, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 0, 0, 0, 0, 0, 0, 0],
+//   [0, 3, 0, 3, 0, 3, 0, 3],
+//   [3, 0, 3, 0, 3, 0, 3, 0],
+//   [0, 3, 0, 3, 0, 3, 0, 3],
+// ];
 
-renderBoard(boardState);
+// renderBoard(boardState);
+
+fetchUpdatedBoardState();
 
 document.getElementById("make-move-button").disabled = true;
 
