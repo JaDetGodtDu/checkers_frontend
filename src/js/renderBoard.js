@@ -12,7 +12,6 @@ function renderBoard(board) {
   boardContainer.style.gridTemplateColumns = "30px repeat(8, 50px)";
   boardContainer.style.gridTemplateRows = "30px repeat(8, 50px)";
 
-  // Add an empty top-left corner
   const corner = document.createElement("div");
   boardContainer.appendChild(corner);
 
@@ -29,9 +28,8 @@ function renderBoard(board) {
 
   // Add row labels and the board cells
   for (let row = 0; row < flippedBoard.length; row++) {
-    // Add row label (numbers 8-1)
     const rowLabel = document.createElement("div");
-    rowLabel.textContent = flippedBoard.length - row; // Reverse the row numbering
+    rowLabel.textContent = flippedBoard.length - row;
     rowLabel.style.display = "flex";
     rowLabel.style.justifyContent = "center";
     rowLabel.style.alignItems = "center";
@@ -44,7 +42,6 @@ function renderBoard(board) {
       cell.classList.add("cell");
       cell.classList.add((row + col) % 2 === 0 ? "black" : "white");
 
-      // Adjust the cell ID to reflect the new numbering
       const cellId = `${String.fromCharCode(97 + col)}${flippedBoard.length - row}`;
       cell.id = cellId;
 
@@ -64,12 +61,11 @@ function renderBoard(board) {
           piece.classList.add("player2"); // White pieces
         }
 
-        // Add king-specific class
         if (flippedBoard[row][col] === 2 || flippedBoard[row][col] === 4) {
           piece.classList.add("king"); // Add king styling
         }
 
-        piece.draggable = true; // Make the piece draggable
+        piece.draggable = true;
         piece.addEventListener("dragstart", handleDragStart);
         cell.appendChild(piece);
       }
@@ -82,7 +78,6 @@ function renderBoard(board) {
     }
   }
 
-  // Append the board container to the board element
   boardElement.appendChild(boardContainer);
 }
 

@@ -19,9 +19,7 @@ export async function sendMoveToBackend(move) {
       }
       console.log("Move sent successfully");
     
-
-      // Clear the pending move and re-enable the button
-      //pendingMove = null;
+      // Disable the button after sending the move
       const button = document.getElementById("make-move-button");
       button.disabled = true;
 
@@ -38,7 +36,6 @@ export async function fetchUpdatedBoardState() {
 
   await fetch("http://localhost:8080/boardstate", {
     method: "GET",
-    //headers: { "Content-Type": "application/json" },
     headers: { "Content-Type": "text/plain" },
   })
     .then((response) => {
@@ -51,7 +48,7 @@ export async function fetchUpdatedBoardState() {
       console.log("Updated board state received:", boardState);
 
       // Re-render the board with the new state
-      renderBoard(boardState); // Assuming the backend sends the board state as `data.boardState`
+      renderBoard(boardState);
     })
     .catch((error) => {
       console.error("Error fetching updated board state:", error);

@@ -6,45 +6,37 @@ export function handleDragStart(event) {
 }
 
 export function handleDragOver(event) {
-    event.preventDefault(); // Allow dropping
-    const target = event.target.closest(".cell");
-    if (target) {
-      target.classList.add("dragover"); // Add the dragover class
-    }
+  event.preventDefault(); // Allow dropping
+  const target = event.target.closest(".cell");
+  if (target) {
+    target.classList.add("dragover"); 
+  }
 }
 
 export function handleDrop(event) {
-    event.preventDefault();
-    const target = event.target.closest(".cell");
-    if (target) {
-      target.classList.remove("dragover"); // Remove the dragover class
+  event.preventDefault();
+  const target = event.target.closest(".cell");
+  if (target) {
+    target.classList.remove("dragover");
+  }
+  const targetCellId = target.id;
+  if (sourceCellId && targetCellId && sourceCellId !== targetCellId) {
+    pendingMove = `${sourceCellId}-${targetCellId}`;
+    console.log(`Pending Move: ${pendingMove}`); // THE MOVE STRING. IE: "a3-b4" - WE WILL SEND THIS TO BACKEND
+    // Move the piece in the DOM
+    const piece = document.querySelector(`#${sourceCellId} .piece`);
+    if (piece) {
+      target.appendChild(piece);
     }
-
-    const targetCellId = target.id; // Get the ID of the target cell
-    if (sourceCellId && targetCellId && sourceCellId !== targetCellId) {
-      // Print the move in the format "a3-b4"
-      pendingMove = `${sourceCellId}-${targetCellId}`;
-      console.log(`Pending Move: ${pendingMove}`); // THE MOVE STRING. IE: "a3-b4" - WE WILL SEND THIS TO BACKEND
-
-      // Move the piece in the DOM
-      const piece = document.querySelector(`#${sourceCellId} .piece`);
-      if (piece) {
-        target.appendChild(piece);
-      }
-
-      // sendMoveToBackend(move);
-
-      const button = document.getElementById("make-move-button");
-      button.disabled = !pendingMove;
-
-      // Clear the source cell ID
-      sourceCellId = null;
-    }
+    const button = document.getElementById("make-move-button");
+    button.disabled = !pendingMove;
+    sourceCellId = null;
+  }
 }
 export function handleDragLeave(event) {
   const target = event.target.closest(".cell");
   if (target) {
-    target.classList.remove("dragover"); // Remove the dragover class
+    target.classList.remove("dragover");
   }
 }
 

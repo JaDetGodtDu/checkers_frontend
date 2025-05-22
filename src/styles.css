@@ -48,14 +48,14 @@ body {
   cursor: grab;
 }
 .piece.king {
-  background-color: gold; /* Example: Gold background for kings */
+  background-color: gold;
   border: 2px solid gold;
   border-radius: 50%;
   position: relative;
 }
 
 .piece.king::after {
-  content: "♔"; /* Example: Unicode crown symbol */
+  content: "♔";
   color: rgb(255, 221, 0);
   font-size: 35px;
   position: absolute;
